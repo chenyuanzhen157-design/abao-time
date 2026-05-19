@@ -3,21 +3,50 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "main": "electron/main.cjs",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron:dev": "npm run build && electron .",
+    "package:mac": "npm run build && electron-builder --mac zip",
+    "package:win": "npm run build && electron-builder --win dir",
+    "package:all": "npm run build && electron-builder --mac zip --win dir"
   },
-  "dependencies": {
+  "build": {
+    "appId": "com.abao.time",
+    "productName": "时间管理大师",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        "zip"
+      ],
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": [
+        "dir"
+      ]
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
     "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.20",
+    "electron": "^39.2.5",
+    "electron-builder": "^26.0.12",
+    "postcss": "^8.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "vite": "^7.0.0"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.5.0",
     "rollup": "npm:@rollup/wasm-node@^4.60.4",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "vite": "^7.0.0"
   }
 }

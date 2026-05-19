@@ -1,4 +1,6 @@
 node_modules
 dist
+release
+.codex-tools
 .DS_Store
 *.log
